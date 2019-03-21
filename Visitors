@@ -1,0 +1,166 @@
+
+interface IPred<T> {
+	boolean apply(T t);
+}
+
+interface IFunc<T, U> {
+	U apply(T t);
+}
+
+interface IComparator<T> {
+	int apply(T t1, T t2);
+}
+
+
+
+//maybe ContainsU
+class StringPred implements IPred<String> {
+
+	public boolean apply(String t) {
+		return t.contains("u");
+	}
+
+}
+
+//maybe IsEven
+class BooleanFunc implements IFunc<Boolean, Integer> {
+
+	public Integer apply(Boolean b) {
+		if (b) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+}
+
+class Comparator implements IComparator<Double> {
+	public int apply(Double d1, Double d2) {
+		if (d1 > d2) {
+			return 1;
+		} else if (d1 < d2) {
+			return -1;
+		} else {
+			return 0;
+		}
+	}
+}
+
+
+interface IShapeVisitor<R> extends IFunc<IShape, R>{
+	//applies an operation to the given Circle
+	R visit(Circle c);
+	//applies an operation to the given Rect
+	R visit(Rect r);
+	//applies an operation to the given Combo
+	R visit(Combo c);
+}
+
+// to represent a geometric shape
+interface IShape {
+	// accepts a visitor to this IShape
+	<R> R accept(IShapeVisitor<R> isd);
+}
+
+// to represent a circle
+class Circle implements IShape {
+	int radius;
+	String color;
+
+	Circle(int radius, String color) {
+		this.radius = radius;
+		this.color = color;
+	}
+
+	// accepts a visitor to this Circle
+	public <R> R accept(IShapeVisitor<R> isd) {
+		return isd.visit(this);
+	}
+}
+
+// to represent a rectangle
+class Rect implements IShape {
+	int width;
+	int height;
+	String color;
+
+	Rect(int width, int height, String color) {
+		this.width = width;
+		this.height = height;
+		this.color = color;
+	}
+
+	// accepts a visitor to this Rect
+	public <R> R accept(IShapeVisitor<R> isd) {
+		return isd.visit(this);
+	}
+}
+
+class Combo implements IShape {
+	IShape top;
+	IShape bot;
+
+	Combo(IShape top, IShape bot) {
+		this.top = top;
+		this.bot = bot;
+	}
+
+	// accepts a visitor to this Combo
+	public <R> R accept(IShapeVisitor<R> isd) {
+		return isd.visit(this);
+	}
+}
+
+
+class ShapeArea implements IShapeVisitor<Double> {
+
+	//computes the area of the given Circle
+	public Double visit(Circle c) {
+		return c.radius * c.radius * Math.PI;
+	}
+
+	//computes the area of the given Rect
+	public Double visit(Rect r) {
+		return r.height * r.width * 1.0;
+	}
+	
+	//computes the area of the given Combo
+	public Double visit(Combo c) {
+		return c.top.accept(this) + c.bot.accept(this);
+	}
+
+
+	//the given IShape accepts this IShapeVisitor
+	public Double apply(IShape x) {
+		return x.accept(this);
+	}
+}
+
+class Grow implements IShapeVisitor<IShape> {
+	int increment;
+	
+	Grow(int inc) {
+		this.increment = inc;
+	}
+	
+	//the given IShape accepts this IShapeVisitor
+	public IShape apply(IShape x) {
+		return x.accept(this);
+	}
+
+	//grows the given Circle by this.increment
+	public IShape visit(Circle c) {
+		return new Circle(c.radius + this.increment, c.color);
+	}
+
+	//grows the given Rect by this.increment
+	public IShape visit(Rect r) {
+		return new Rect(r.width + this.increment, r.height + this.increment, r.color);
+	}
+
+	//grows the given Combo by this.increment
+	public IShape visit(Combo c) {
+		return new Combo(c.top.accept(this), c.bot.accept(this));
+	}
+}
