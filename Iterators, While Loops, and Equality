@@ -1,13 +1,61 @@
 // ITERATORS AND WHILE LOOPS
 
 //	Design an iterator that iterates over the numbers from 0 to 10, inclusive.
-//
+
+class IterateUntilTen implements Iterator<Integer> {
+  int current = 0
+  
+  public boolean hasNext() {
+    return num <= 10
+  }
+  
+  public Integer Next() {
+    int temp = num;
+    num += 1;
+    return temp;
+  }
+}
+
 //	Design an iterator that iterates over even numbers starting with 0.
-//
+
+class IterateEvensFromZero implements Iterator<Integer> {
+  int current = 0
+  
+  public boolean hasNext() {
+    return true
+  }
+  
+  public Integer Next() {
+    int temp = num;
+    num += 2;
+    return temp;
+  }
+}
+
 //	Design an iterator that is given a String when constructed that iterates over each character.
 //
 //	Design an iterator that is given another iterator when constructed and iterates over every other element in the given iterator.
-//
+
+class IterateEveryOther implements Iterator<Integer> {
+  Iterator given;
+  
+  IterateEveryOther(Iterator given) {
+    this.given = given;
+  }
+  
+  public boolean hasNext() {
+    return given.hasNext();
+  }
+  
+  public Integer Next() {
+    int result = given.Next();
+    if (given.hasNext()) {
+      given.next();
+    }
+    return result;
+  }
+}
+
 //	Design a class EachCharacter implements Iterable<String> which is given a String when constructed and whose iterator method
 //
 //	returns an iterator that iterates over each character in the String.
