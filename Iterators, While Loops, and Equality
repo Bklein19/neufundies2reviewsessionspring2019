@@ -1,0 +1,25 @@
+// ITERATORS AND WHILE LOOPS
+
+//	Design an iterator that iterates over the numbers from 0 to 10, inclusive.
+//
+//	Design an iterator that iterates over even numbers starting with 0.
+//
+//	Design an iterator that is given a String when constructed that iterates over each character.
+//
+//	Design an iterator that is given another iterator when constructed and iterates over every other element in the given iterator.
+//
+//	Design a class EachCharacter implements Iterable<String> which is given a String when constructed and whose iterator method
+//
+//	returns an iterator that iterates over each character in the String.
+//
+//	Design the following method in a Utils class:
+//
+//	int sum(Iterator<Integer> iter); [assume that the iterator has a finite number of elements]
+
+// EQUALS
+
+//	Practice overriding equals and hashCode for different data definitions:
+//
+//		public boolean equals(Object o);
+//
+//		public int hashCode();
