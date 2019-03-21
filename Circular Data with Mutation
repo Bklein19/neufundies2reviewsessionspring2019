@@ -1,0 +1,9 @@
+// CIRCULAR DATA WITH MUTATION
+
+//	Revisit Part 2 (Methods for Structured Data) in Lab 2. Adapt this problem to use an abstract class APet that implements IPet,
+//
+//	and have each pet class extend APet. Abstract what you can into APet. Also add a "Person owner;" field into APet and adjust your examples and methods appropriately.
+//
+//	 
+//
+//	Define a void method that appends a given Deque<T> to the end of this Deque<T>. How would you write tests for this? Are there any instances where this method fails to work as expected?
