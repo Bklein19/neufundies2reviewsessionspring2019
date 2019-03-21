@@ -1,0 +1,30 @@
+// ARRAYLISTS AND FOR LOOPS
+
+//	Define the following methods in a Utils class:
+
+		// return the sum of the numbers in the given ArrayList
+		class Utils {
+			
+			int sum(ArrayList<Integer> arr) {
+				int sumSoFar = 0;
+				for(int number : arr) {
+					sumSoFar += number;
+				}
+				return sumSoFar;
+			}
+			
+			// does the given ArrayList have only positive partial sums?
+
+			// i.e. (1, 4, 2, -10, 5) does not since 1 + 4 + 2 + (-10) < 0
+
+			boolean positivePartialSums(ArrayList<Integer> arr) {
+				int sumSoFar = 0;
+				for(int number : arr) {
+					sumSoFar += number;
+					if (sumSoFar < 0) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
