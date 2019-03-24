@@ -98,3 +98,21 @@ class StringIterator implements Iterator<String> {
 //		public boolean equals(Object o);
 //
 //		public int hashCode();
+
+
+
+class ExamplesIterator {
+	void testIterator(Tester t) {
+		EachCharacter thing1 = new EachCharacter("dog");
+		Iterator<String> thing1siter = thing1.iterator();
+		t.checkExpect(thing1siter.next(), "d");
+		t.checkExpect(thing1siter.hasNext(), true);
+		
+		t.checkExpect(thing1siter.next(), "o");
+		t.checkExpect(thing1siter.hasNext(), true);
+
+		t.checkExpect(thing1siter.next(), "g");
+		t.checkExpect(thing1siter.hasNext(), false);
+
+	}
+}
