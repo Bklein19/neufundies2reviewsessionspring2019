@@ -1,3 +1,39 @@
+//IListVisitor: converts a list of integers to strings.
+
+interface IListFunc<T, U> {
+	U apply(IList<T> t);
+}
+
+interface IListVisitor<T, U> extends IListFunc<T, U> {
+
+	 U visitCons(ConsList<T> t);
+	 
+	 U visitEmpty(MTList<T> t);
+
+}
+
+
+class TotalListLength implements IListVisitor<Integer, String> {
+
+	@Override
+	public String apply(IList<Integer> t) {
+		return t.accept(this);
+	}
+
+	@Override
+	public String visitCons(ConsList<Integer> t) {
+		return t.first.toString();
+	}
+
+	@Override
+	public String visitEmpty(MTList<Integer> t) {
+		return "";
+	}
+
+}
+
+
+
 
 interface IPred<T> {
 	boolean apply(T t);
