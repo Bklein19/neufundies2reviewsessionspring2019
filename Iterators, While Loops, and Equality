@@ -59,7 +59,34 @@ class IterateEveryOther implements Iterator<Integer> {
 //	Design a class EachCharacter implements Iterable<String> which is given a String when constructed and whose iterator method
 //
 //	returns an iterator that iterates over each character in the String.
-//
+
+class StringIterator implements Iterator<String> {
+	String string;
+
+	StringIterator(String s) {
+		this.string = s;
+	}
+
+	public boolean hasNext() {
+		return string.length() >= 1;
+	}
+
+	public String next() {
+		String result = "";
+		if (string.length() > 1) {
+			result = string.substring(0, 1);
+		} else {
+			result = "" + string.charAt(0);
+		}
+		string = string.substring(1, string.length());
+
+		return result;
+
+	}
+
+}
+
+
 //	Design the following method in a Utils class:
 //
 //	int sum(Iterator<Integer> iter); [assume that the iterator has a finite number of elements]
