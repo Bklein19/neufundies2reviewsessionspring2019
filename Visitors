@@ -1,3 +1,21 @@
+//OrPredicate: ORs the results of two different predicates.
+
+class OrPredicate<T> implements IPred<T> {
+	IPred<T> firstPred;
+	IPred<T> otherPred;
+	
+	OrPredicate(IPred<T> pred1, IPred<T> pred2) {
+		pred1 = firstPred;
+		pred2 = otherPred;
+	}
+	
+	public boolean apply(T t) {
+		return firstPred.apply(t) || otherPred.apply(t);
+	}
+	
+}
+
+
 //IListVisitor: converts a list of integers to strings.
 
 interface IListFunc<T, U> {
