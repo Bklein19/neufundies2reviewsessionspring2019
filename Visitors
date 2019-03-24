@@ -218,3 +218,32 @@ class Grow implements IShapeVisitor<IShape> {
 		return new Combo(c.top.accept(this), c.bot.accept(this));
 	}
 }
+
+
+
+
+interface IList<T> {
+	<U> U accept(IListVisitor<T, U> visitor);
+}
+
+class ConsList<T> implements IList<T> {
+	T first;
+	IList<T> rest;
+
+	ConsList(T first, IList<T> rest) {
+		this.first = first;
+		this.rest = rest;
+	}
+
+	public <U> U accept(IListVisitor<T, U> visitor) {
+		return visitor.apply(this);
+	}
+}
+
+class MTList<T> implements IList<T> {
+
+	public <U> U accept(IListVisitor<T, U> visitor) {
+		return visitor.apply(this);
+	}
+
+}
